@@ -51,7 +51,7 @@
         <div class="container">
             <div class="church_prayer_detail padding additional-margin" style="display: table;">
                 <span style="vertical-align:middle; display: table-cell;">
-                    <h3 style="text-shadow: 2px 2px #000000; font-size:50px; text-align:center; vertical-align:middle; display: table-cell;""><?php echo e($Event->title); ?></h3>
+                    <h3 style="text-shadow: 2px 2px #000000; font-size:50px; text-align:center; vertical-align:middle; display: table-cell;"><?php echo e($Event->title); ?></h3>
                     <center>
                       <a target="new" href="<?php echo e($Event->link); ?>" class="default_btn black-bg_btn" style="border-radius:10px; text-align: center !important; background-color:#fae204; color:#040488; margin-top:50px; ">Register Now <i class="fa fa-pencil"></i></a>
                     </center>
@@ -82,7 +82,7 @@
                             </div>
              
                         </div>
-                        <div class="church_picture"></div>
+                        <div style="background-image: url(<?php echo e(asset('theme/extra-imaages/church_padiri_01.jpg')); ?>);" class="church_picture"></div>
                     </div>
         
                 </div>
@@ -184,7 +184,10 @@
             </ul>
         </div>
     </section>
+    <?php $BlogS = DB::table('blogs')->get(); ?>
+    <?php if($BlogS->isEmpty()): ?>
 
+    <?php else: ?>
 
     <?php $Blogs = DB::table('blogs')->limit(2)->where('event' ,'0')->get(); ?>
     <?php if($Blogs->isEmpty()): ?>
@@ -322,6 +325,8 @@
             </div>
         </div>
     </section>
+    <?php endif; ?>
+
     <?php endif; ?>
 </div>  
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

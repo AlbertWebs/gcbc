@@ -53,6 +53,20 @@
                             <span><i class="fa fa-book" aria-hidden="true"></i><?php echo e($Settings->address); ?></span>
                             <span><i class="fa fa-phone" aria-hidden="true"></i><?php echo e($Settings->mobile); ?> | <?php echo e($Settings->mobile_one); ?></span>
                         </div>
+                        
+                        
+                        <div class="widget_social">
+                            <br> <br>
+                            <ul>
+                                
+                                <li><a class="blue_light" href="<?php echo e($Settings->twitter); ?>"><span><i class="fa fa-twitter"></i></span>follow us</a></li>
+                                <li><a class="blue" href="<?php echo e($Settings->twitter); ?>"><span><i class="fa fa-facebook"></i></span>Like us</a></li>
+                                <li><a class="pink" href="<?php echo e($Settings->instagram); ?>"><span><i class="fa fa-instagram"></i></span>follow us</a></li>
+                                
+                                <li><a class="red" href="<?php echo e($Settings->youtube); ?>"><span><i class="fa fa-youtube"></i></span>Youtube</a></li>
+                            </ul>
+                        </div>
+                        
                     </div>       
                 </div>
             </div>
@@ -60,6 +74,7 @@
             
           
         </div>
+        
 
     </div>
 </footer><?php /**PATH /home/designekta/gcbc/resources/views/front/footer.blade.php ENDPATH**/ ?>

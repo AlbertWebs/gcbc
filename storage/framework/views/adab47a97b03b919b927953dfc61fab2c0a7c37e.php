@@ -1,7 +1,6 @@
-@extends('front.master-pages')
-@section('content')
+<?php $__env->startSection('content'); ?>
 <?php $SiteSettings = DB::table('sitesettings')->get(); ?>
-@foreach ($SiteSettings as $Settings)
+<?php $__currentLoopData = $SiteSettings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $Settings): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
 <div style="min-height:124px"></div>
 		<!--sab banner start-->
@@ -14,23 +13,23 @@
 
         <div class="content">
        
-            {{--  --}}
+            
             <section>
                 <div class="container">
                   <div class="row">
                     <div class="col-md-5 col-md-5 border-1px p-20">
                       <h4 class="mt-0 pt-5">Give Using M-Pesa PayBill</h4>
-                      {{-- <p>Thank you fo</p> --}}
+                      
                       <hr>
                       
                  
-                          <img style="max-width: 500px;"  src="{{url('/')}}/uploads/banners/GCBC-MPESA-02.png" alt="">
+                          <img style="max-width: 500px;"  src="<?php echo e(url('/')); ?>/uploads/banners/GCBC-MPESA-02.png" alt="">
                      
           
                     </div>
                     <div class="col-md-5 col-md-offset-1 col-md-5 border-1px p-20">
                       <h4 class="mt-0 pt-5">Give Online</h4>
-                      {{-- <p>Thank you for making a donation to our charitable organization. Please use the form below to pay your desired giving amount.</p> --}}
+                      
                       <hr>
           
                       <!-- Paypal Form Starts -->
@@ -129,7 +128,7 @@
                   </div>
                 </div>
               </section>
-            {{--  --}}
+            
 
             
             <section style="padding:0px; margin:0 auto !important">
@@ -142,7 +141,7 @@
                                 <p>
                                     God is holy, glorious, and sovereign over all things. As a church, we are committed to knowing, loving, obeying, and glorifying the Father, Son, and Holy Spirit in all we do.
                                 </p>
-                                {{-- <a href="#" class="arrow_btn">See More<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a> --}}
+                                
                             </div>
                         </li>
                         <li style="min-height:310px !important">
@@ -152,7 +151,7 @@
                                 <p>
                                     The Bible is ultimately authoritative in the life of the believer and the church. This leads us to a commitment to Bible exposition in all our ministries, whether for adults, youth, or even children.
                                 </p>
-                                {{-- <a href="#" class="arrow_btn">See More<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a> --}}
+                                
                             </div>
                         </li>
                         <li style="min-height:310px !important">
@@ -162,7 +161,7 @@
                                 <p>
                                     Reverence, awe, joy, fear, and submission are true responses to God’s glory and salvation. We seek to cultivate worship that rightly exalts God while humbling and dignifying people by placing them in their right place below Him.
                                 </p>
-                                {{-- <a href="#" class="arrow_btn">See More<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a> --}}
+                                
                             </div>
                         </li>
                     </ul>
@@ -178,5 +177,6 @@
 
  
 
-@endforeach
-@endsection
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('front.master-pages', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/designekta/gcbc/resources/views/front/give.blade.php ENDPATH**/ ?>

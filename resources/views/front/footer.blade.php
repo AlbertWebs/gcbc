@@ -53,6 +53,20 @@
                             <span><i class="fa fa-book" aria-hidden="true"></i>{{$Settings->address}}</span>
                             <span><i class="fa fa-phone" aria-hidden="true"></i>{{$Settings->mobile}} | {{$Settings->mobile_one}}</span>
                         </div>
+                        {{--  --}}
+                        
+                        <div class="widget_social">
+                            <br> <br>
+                            <ul>
+                                {{-- <li><a class="orange" href="{{$Settings->twitter}}"><span><i class="fa fa-twitter"></i></span>RSS feed</a></li> --}}
+                                <li><a class="blue_light" href="{{$Settings->twitter}}"><span><i class="fa fa-twitter"></i></span>follow us</a></li>
+                                <li><a class="blue" href="{{$Settings->twitter}}"><span><i class="fa fa-facebook"></i></span>Like us</a></li>
+                                <li><a class="pink" href="{{$Settings->instagram}}"><span><i class="fa fa-instagram"></i></span>follow us</a></li>
+                                {{-- <li><a class="pink" href="#"><span><i class="fa fa-twitter"></i></span>follow us</a></li> --}}
+                                <li><a class="red" href="{{$Settings->youtube}}"><span><i class="fa fa-youtube"></i></span>Youtube</a></li>
+                            </ul>
+                        </div>
+                        {{--  --}}
                     </div>       
                 </div>
             </div>
@@ -67,6 +81,7 @@
             </div> --}}
           
         </div>
+        
 
     </div>
 </footer>

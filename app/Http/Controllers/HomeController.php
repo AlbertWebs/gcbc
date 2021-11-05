@@ -11,6 +11,9 @@ use App\Notifications;
 use Session;
 use App\ReplyMessage;
 use Carbon\Carbon;
+use Alaouy\Youtube\Rules\ValidYoutubeVideo;
+use Alaouy\Youtube\Facades\Youtube;
+
 
 use DB;
 
@@ -19,6 +22,17 @@ class HomeController extends Controller
   
     public function index()
     {
+        // List videos in a given channel, return an array of PHP objects
+        $videoList = Youtube::listChannelVideos('UCZK_K5npb8BTpY9Zlnn9Z-w', 40);
+        // var_dump($videoList);
+        // die();
+        // $json = file_get_contents($videoList);
+        // $json_output = json_decode($videoList ,true);
+        // foreach ( $json_output->data->items as $data ){
+
+        // }
+        // var_dump($videoList);
+        // die();
         $Events = DB::table('blogs')->whereDate('date', '>=', Carbon::now()->toDateString())->get();
         $title="Grace Community Bible Church | Welcome to GCBC";
         return view('front.index',compact('title','Events'));

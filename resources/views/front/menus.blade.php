@@ -36,11 +36,8 @@
                     
                         <li><a href="{{url('our-programs')}}">Schedule</a></li>
                         {{-- <li><a href="{{url('give-now')}}">Give</a></li> --}}
-                        <li><a  href="#">Give</a>
-                            <ul class="children submenu">
-                                <li><a href="{{url('/')}}/give-paybill">PayBill Number</a></li>
-                                <li><a href="{{url('/')}}#">Online Giving</a></li>
-                            </ul>
+                        <li><a  href="{{url('/')}}/give-paybill">Give</a>
+                            
                         </li>
                         <li><a href="{{url('/')}}/contact-us">contact us</a></li>
                     </ul>
@@ -73,11 +70,8 @@
                     
                         <li><a href="{{url('our-programs')}}">Schedule</a></li>
                         {{-- <li><a href="{{url('give-now')}}">Give</a></li> --}}
-                        <li><a  href="#">Give</a>
-                            <ul class="children submenu">
-                                <li><a href="{{url('/')}}/give-paybill">PayBill Number</a></li>
-                                <li><a href="{{url('/')}}#">Online Giving</a></li>
-                            </ul>
+                        <li><a  href="{{url('/')}}/give-paybill">Give</a>
+                            
                         </li>
                         <li><a href="{{url('/')}}/contact-us">contact us</a></li>
                     </ul>
