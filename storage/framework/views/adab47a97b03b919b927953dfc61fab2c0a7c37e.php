@@ -23,7 +23,7 @@
                       <hr>
                       
                  
-                          <img style="max-width: 500px;"  src="<?php echo e(url('/')); ?>/uploads/banners/GCBC-MPESA-02.png" alt="">
+                          <img style="max-width: 450px;"  src="<?php echo e(url('/')); ?>/uploads/GCBC-mpesa.jpg" alt="">
                      
           
                     </div>

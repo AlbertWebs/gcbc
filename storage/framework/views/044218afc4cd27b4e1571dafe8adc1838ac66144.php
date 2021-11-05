@@ -36,11 +36,8 @@
                     
                         <li><a href="<?php echo e(url('our-programs')); ?>">Schedule</a></li>
                         
-                        <li><a  href="#">Give</a>
-                            <ul class="children submenu">
-                                <li><a href="<?php echo e(url('/')); ?>/give-paybill">PayBill Number</a></li>
-                                <li><a href="<?php echo e(url('/')); ?>#">Online Giving</a></li>
-                            </ul>
+                        <li><a  href="<?php echo e(url('/')); ?>/give-paybill">Give</a>
+                            
                         </li>
                         <li><a href="<?php echo e(url('/')); ?>/contact-us">contact us</a></li>
                     </ul>
@@ -73,11 +70,8 @@
                     
                         <li><a href="<?php echo e(url('our-programs')); ?>">Schedule</a></li>
                         
-                        <li><a  href="#">Give</a>
-                            <ul class="children submenu">
-                                <li><a href="<?php echo e(url('/')); ?>/give-paybill">PayBill Number</a></li>
-                                <li><a href="<?php echo e(url('/')); ?>#">Online Giving</a></li>
-                            </ul>
+                        <li><a  href="<?php echo e(url('/')); ?>/give-paybill">Give</a>
+                            
                         </li>
                         <li><a href="<?php echo e(url('/')); ?>/contact-us">contact us</a></li>
                     </ul>
