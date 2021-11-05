@@ -82,7 +82,7 @@ div.dl-menuwrapper li a:hover:after,
 .item_images a i:hover,
 .language_changer .selectric-items li.selected,
 .church_accounts_language li a i{
-	color:#c62641;
+	color:#663398;
 }
 
 
@@ -134,7 +134,7 @@ div.dl-menuwrapper li a:hover:after,
 .church_container_version2 .audioplayer .player .progressbar div,
 .church_container_version2 .audioplayer .controls .pause:before, 
 .church_container_version2 .audioplayer .controls .play:before{
-	border-color: #c62641 !important;
+	border-color: #663398 !important;
 }
 
 
@@ -220,7 +220,7 @@ div.dl-menuwrapper button,
 .church_container_version2 .audioplayer .controls .pause:hover:before,
 .church_container_version2 .audioplayer .controls .play:hover,
 .church_container_version2 .player .progressbar .bar-played{
-	background-color:#c62641;
+	background-color:#663398;
 }
 
 

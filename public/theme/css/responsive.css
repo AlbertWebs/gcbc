@@ -724,7 +724,7 @@
 	div.listing_picture_news,
 	.church_testimonial_nav,
 	.church_progress_menu.container,
-	.item_caption,
+	
 	.church_navigation,
 	.pull-right .social-icons,
 	.church_banner .nav-arrows a,
@@ -1082,9 +1082,9 @@
 		font-size: 24px;
 	}
 	
-	.audioplayer.style_audio_2{
+	/* .audioplayer.style_audio_2{
 		display: none;
-	}
+	} */
 
 	div.church_blog_content div.share_social li{
 		float: left;
@@ -1265,6 +1265,31 @@
 	.church_causes_fig, .church_causes_wrap{
 		overflow: hidden;
 	}
+	.hide-mobile{
+		display: none;
+	}
+
+	.slider-detail .item_caption{
+		background: rgba(0, 0, 0, 0.1) none repeat scroll 0 0 !important;;
+		/* margin: -87px 0 auto; */
+		/* left: 50%; */
+		opacity: 1;
+		padding: 23px 20px 22px;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 15% !important;
+		margin: auto;
+		width: 100%;
+		z-index: 99;
+	}
+
+	.item_caption div{
+		
+		font-size:30px !important;
+	}
+
+
 
 }
 /*============	Media 480 Start ============ */
@@ -1282,7 +1307,6 @@
 @media (max-width: 360px) {
 
 }
-
 
 
 

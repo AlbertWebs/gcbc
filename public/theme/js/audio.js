@@ -15,19 +15,19 @@
                 timeSeparator: ' / ',
                 playerAbovePlaylist: true,
                 infoElements: ['title' , 'artist'] ,
-                // elements: ['artwork', 'information', 'controls', 'progress', 'time', 'volume'],
+                elements: ['artwork', 'information', 'controls', 'progress', 'time', 'volume'],
                 timeElements: ['current', 'duration'],
-                // controlElements: ['backward', 'play', 'forward', 'stop'],
-                // onLoad: function() {},
-                // onPlay: function() {},
-                // onPause: function() {},
-                // onStop: function() {},
-                // onFwd: function() {},
-                // onRew: function() {},
-                // volumeChanged: function() {},
-                // seeked: function() {} ,
-                // trackClicked: function() {},
-                // onMute: function() {}
+                controlElements: ['backward', 'play', 'forward', 'stop'],
+                onLoad: function() {},
+                onPlay: function() {},
+                onPause: function() {},
+                onStop: function() {},
+                onFwd: function() {},
+                onRew: function() {},
+                volumeChanged: function() {},
+                seeked: function() {} ,
+                trackClicked: function() {},
+                onMute: function() {}
             };
 
         //Setup Touch Events
@@ -75,69 +75,69 @@
                     //PREPARE VOLUME
                     if (this.settings.elements[elemItem] == "volume" ) {
 
-                        // volumeElem   = "<div class='volume'><div class='volume-btn' title='Volume'></div><div class=' volume-adjust'><div><div></div></div></div></div>" ;
-                        // fullPlayerElem  += volumeElem;
+                        volumeElem   = "<div class='volume'><div class='volume-btn' title='Volume'></div><div class=' volume-adjust'><div><div></div></div></div></div>" ;
+                        fullPlayerElem  += volumeElem;
                     }
                     //PREPARE PROGRESS
                     else if (this.settings.elements[elemItem] == "progress" ) {
-                        // progressElem = "<div class='progressbar'><div class='bar-loaded' ></div><div class='bar-played'></div></div>";
-                        // fullPlayerElem  += progressElem;
+                        progressElem = "<div class='progressbar'><div class='bar-loaded' ></div><div class='bar-played'></div></div>";
+                        fullPlayerElem  += progressElem;
                     }
                     //PREPARE ARTWORK
                     else if (this.settings.elements[elemItem] == "artwork" ) {
-                    //    artworkElem = "<div class='cover'></div>";
-                    //    fullPlayerElem  += artworkElem;
+                       artworkElem = "<div class='cover'></div>";
+                       fullPlayerElem  += artworkElem;
                     }
                     //PREPARE INFORMATION displayed by the player in  the given order
                     else if (this.settings.elements[elemItem] == "information" ) {
 
-                        // $.inArray("title", this.settings.infoElements ) != '-1'   ? titleElem     = "<div class='title'></div>"  : titleElem = " " ;
-                        // $.inArray("artist", this.settings.infoElements ) != '-1'  ? artistElem    = "<div class='artist'></div>" : artistElem = " " ;
+                        $.inArray("title", this.settings.infoElements ) != '-1'   ? titleElem     = "<div class='title'></div>"  : titleElem = " " ;
+                        $.inArray("artist", this.settings.infoElements ) != '-1'  ? artistElem    = "<div class='artist'></div>" : artistElem = " " ;
 
-                        // for( var item in this.settings.infoElements ) {
-                        //     if (this.settings.infoElements[item] == "title" ) {    infoInnerElem += titleElem;  }
-                        //     else if ( this.settings.infoElements[item]  == "artist" ) {   infoInnerElem += artistElem ;  }
-                        // }
-                        // infoElem = "<div class='info' >" + infoInnerElem + "</div>";
-                        // fullPlayerElem  += infoElem;
+                        for( var item in this.settings.infoElements ) {
+                            if (this.settings.infoElements[item] == "title" ) {    infoInnerElem += titleElem;  }
+                            else if ( this.settings.infoElements[item]  == "artist" ) {   infoInnerElem += artistElem ;  }
+                        }
+                        infoElem = "<div class='info' >" + infoInnerElem + "</div>";
+                        fullPlayerElem  += infoElem;
                     }
                     //PREPARE TIME (current & Duration) in the given order
                     else if (this.settings.elements[elemItem] == "time" ) {
 
-                        // $.inArray("current", this.settings.timeElements) != '-1'  ? curTimeElem = "<div class='time-current'></div>" : curTimeElem = " " ;
-                        // $.inArray("duration", this.settings.timeElements) != '-1' ? durTimeElem = "<div class='time-duration'></div>" : durTimeElem = " " ;
-                        // timeSeparator =  "<div class='time-separator'>" + this.settings.timeSeparator.replace(/\s/g, '&nbsp;') + "</div>" ;
+                        $.inArray("current", this.settings.timeElements) != '-1'  ? curTimeElem = "<div class='time-current'></div>" : curTimeElem = " " ;
+                        $.inArray("duration", this.settings.timeElements) != '-1' ? durTimeElem = "<div class='time-duration'></div>" : durTimeElem = " " ;
+                        timeSeparator =  "<div class='time-separator'>" + this.settings.timeSeparator.replace(/\s/g, '&nbsp;') + "</div>" ;
 
-                        // for( var item in this.settings.timeElements ) {
-                        //     if( item == 1 ) { timeInnerElem +=  timeSeparator; }
-                        //     if (this.settings.timeElements[item] == "current" ) {    timeInnerElem += curTimeElem ;  }
-                        //     else if ( this.settings.timeElements[item]  == "duration" ) {   timeInnerElem += durTimeElem;  }
-                        // }
-                        // timeElem = "<div class='timeHolder'>" + timeInnerElem + "</div>";
-                        // fullPlayerElem  += timeElem;
+                        for( var item in this.settings.timeElements ) {
+                            if( item == 1 ) { timeInnerElem +=  timeSeparator; }
+                            if (this.settings.timeElements[item] == "current" ) {    timeInnerElem += curTimeElem ;  }
+                            else if ( this.settings.timeElements[item]  == "duration" ) {   timeInnerElem += durTimeElem;  }
+                        }
+                        timeElem = "<div class='timeHolder'>" + timeInnerElem + "</div>";
+                        fullPlayerElem  += timeElem;
                     }
                     //PREPARE CONTROLS inner elements to display [play, stop, forward or backward] in the given order
                     else if (this.settings.elements[elemItem] == "controls" ) {
 
-                        // $.inArray("backward", this.settings.controlElements) != '-1'  ? backwardElem   = "<div class='rew'></div>"      : backwardElem  = " " ;
-                        // $.inArray("forward", this.settings.controlElements)  != '-1'  ? forwardElem    = "<div class='fwd'></div>"        : forwardElem   = " " ;
-                        // $.inArray("stop", this.settings.controlElements) != '-1'      ? stopElem       = "<div class='stop'></div>"       : stopElem      = " " ;
-                        // $.inArray("play", this.settings.controlElements) != '-1'      ? playElem       = "<div class='play'></div><div class='pause'></div>" : playElem  = " " ;
+                        $.inArray("backward", this.settings.controlElements) != '-1'  ? backwardElem   = "<div class='rew'></div>"      : backwardElem  = " " ;
+                        $.inArray("forward", this.settings.controlElements)  != '-1'  ? forwardElem    = "<div class='fwd'></div>"        : forwardElem   = " " ;
+                        $.inArray("stop", this.settings.controlElements) != '-1'      ? stopElem       = "<div class='stop'></div>"       : stopElem      = " " ;
+                        $.inArray("play", this.settings.controlElements) != '-1'      ? playElem       = "<div class='play'></div><div class='pause'></div>" : playElem  = " " ;
 
-                        // for( var item in this.settings.controlElements ) {
-                        //     if (this.settings.controlElements[item] == "backward" ) {       controlInnerElem  +=  backwardElem ;  }
-                        //     else if (this.settings.controlElements[item] == "play" ) {      controlInnerElem +=  playElem;  }
-                        //     else if (this.settings.controlElements[item] == "forward" ) {   controlInnerElem +=  forwardElem;  }
-                        //     else if (this.settings.controlElements[item] == "stop" ) {   controlInnerElem +=  stopElem;  }
-                        // }
-                        // controlElem   = "<div class='controls'>" + controlInnerElem + "</div>";
-                        // fullPlayerElem  += controlElem;
+                        for( var item in this.settings.controlElements ) {
+                            if (this.settings.controlElements[item] == "backward" ) {       controlInnerElem  +=  backwardElem ;  }
+                            else if (this.settings.controlElements[item] == "play" ) {      controlInnerElem +=  playElem;  }
+                            else if (this.settings.controlElements[item] == "forward" ) {   controlInnerElem +=  forwardElem;  }
+                            else if (this.settings.controlElements[item] == "stop" ) {   controlInnerElem +=  stopElem;  }
+                        }
+                        controlElem   = "<div class='controls'>" + controlInnerElem + "</div>";
+                        fullPlayerElem  += controlElem;
                     }
                 }
 
 
                 //ADD THE PREPARED ELEMENT SORTED IN THEIR RIGHT ORDER TO THE PLAYER ELEMENT
-                // playerElem = $("<div class='player' >" + fullPlayerElem + "</div>");
+                playerElem = $("<div class='player' >" + fullPlayerElem + "</div>");
                 //console.log(this.element);
                 if(this.settings.playerAbovePlaylist) {
                     $(playerElem).insertBefore($(this.element).find(".playlist"));
@@ -160,21 +160,21 @@
                         this.volumeAdjuster         = this.playerHolder.find('.volume-adjust' + ' > div' );
                         this.volumeValue            = this.settings.volume / 100;
                         this.volumeDefault          = 0;
-                        // this.trackInfo              = this.playerHolder.find('.info');
+                        this.trackInfo              = this.playerHolder.find('.info');
                         //tracker           = playerHolder.find('.progressbar'),
                         //volume            = playerHolder.find('.volume'),
-                        // this.coverInfo              = this.playerHolder.find('.cover');
-                        // this.controlsInfo           = this.playerHolder.find('.controls');
-                        // this.controlPlay            = $(this.controlsInfo).find('.play');
-                        // this.controlPause           = $(this.controlsInfo).find('.pause');
-                        // this.controlStop            = $(this.controlsInfo).find('.stop');
-                        // this.controlFwd             = $(this.controlsInfo).find('.fwd');
-                        // this.controlRew             = $(this.controlsInfo).find('.rew');
-                        // this.cssClass               =
-                        // {
-                        //     playing:        'playing',
-                        //     mute:           'mute'
-                        // };
+                        this.coverInfo              = this.playerHolder.find('.cover');
+                        this.controlsInfo           = this.playerHolder.find('.controls');
+                        this.controlPlay            = $(this.controlsInfo).find('.play');
+                        this.controlPause           = $(this.controlsInfo).find('.pause');
+                        this.controlStop            = $(this.controlsInfo).find('.stop');
+                        this.controlFwd             = $(this.controlsInfo).find('.fwd');
+                        this.controlRew             = $(this.controlsInfo).find('.rew');
+                        this.cssClass               =
+                        {
+                            playing:        'playing',
+                            mute:           'mute'
+                        };
 
                 //Volume cannot be set using JavaScript, so the volumechange event will never be fired.
                 //Even if the user changes the volume on their device while mobile Safari is open, this event will not fire

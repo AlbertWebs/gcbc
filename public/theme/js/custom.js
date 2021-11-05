@@ -2,6 +2,7 @@ $(document).ready(function(){
 	
 	"use strict";
 	
+	
 	/*
 	======================================================
 	  		Countdown
@@ -135,7 +136,8 @@ $(document).ready(function(){
 		  slidesToShow: 1,
 		  slidesToScroll: 1,
 		  autoplay: true,
-		  arrows: true
+		  arrows: true,
+		  speed:4000,
 		});
    	}
    	/*
@@ -147,7 +149,7 @@ $(document).ready(function(){
 		  slidesToShow: 1,
 		  slidesToScroll: 1,
 		  autoplay: false,
-		  arrows: true,
+		  arrows: false,
 		  fade: true
 		});
    	}
