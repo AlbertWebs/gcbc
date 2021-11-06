@@ -16,26 +16,41 @@
                     @foreach($Sermons as $sermons)
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="church_causes_columns">
-                            {{-- <figure> --}}
-                                <iframe width="300" height="349" src="https://www.youtube.com/embed/{{$sermons->video}}?rel=0&hd=1" frameborder="0" allowfullscreen></iframe>
-                                
+                            @if($sermons->video == null)
+                            <figure>
+                                {{-- <img src="extra-images/causes_img_01.jpg" alt=""> --}}
+                                <img  src="{{url('/')}}/uploads/sermons/{{$sermons->image}}" alt="">
                                 {{-- <div class="church_absolute_middel">
                                     <ul class="meta_address">
                                         <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i> Jason Adam</a></li>
                                         <li><a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i>5/16/2017</a></li>
                                     </ul>
                                 </div> --}}
+                            </figure>
+                            @else
+                            {{-- <figure> --}}
+                                <iframe width="300" height="349" src="https://www.youtube.com/embed/{{$sermons->video}}?rel=0&hd=1" frameborder="0" allowfullscreen></iframe>
                             {{-- </figure> --}}
+                            @endif
                             <div class="church_blog_content">
                                 <div class="church_causes2_caption">
                                     <h4><a href="#">{{$sermons->title}}</a></h4>
                                     <p>{{$sermons->meta}}</p>
                                 </div>
-                                {{-- <div class="chu_progress_causes">
+                                @if($sermons->audio == null)
+
+                                @else
+                                <div class="chu_progress_causes">
                                     <div class="skillbar1 clearfix" data-percent="20%">
-                                        <div class="skillbar1-bar bar_2"><span>20%</span></div>
+                                        <audio
+                                            controls
+                                            src="{{$sermons->audio}}">
+                                                Your browser does not support the
+                                                <code>audio</code> element.
+                                        </audio> 
                                     </div>
-                                </div> --}}
+                                </div>
+                                @endif
                                 <div class="chu-detail_donars">
                                     <ul class="donars_right">
                                         <li><small>{{$sermons->books}}</small></li>
@@ -52,7 +67,7 @@
 
         {{--  --}}
 
-        <section>
+        {{-- <section>
             <div class="container">
                 <div class="row">
                     @foreach ($Sermons as $Sermons)
@@ -63,10 +78,9 @@
                                 <img style="width:300px" src="{{url('/')}}/uploads/sermons/{{$Sermons->image}}" alt="">
                             </figure>
                             @else 
-                            {{-- <figure> --}}
+                          
                                 <iframe width="300" height="349" src="https://www.youtube.com/embed/{{$Sermons->video}}?rel=0&hd=1" frameborder="0" allowfullscreen></iframe>
-                                {{-- <img style="width:300px" src="{{url('/')}}/uploads/sermons/{{$Sermons->image}}" alt=""> --}}
-                            {{-- </figure> --}}
+                             
                             @endif
                             <div class="church_blog_content">
                                 <div class="church_causes2_caption">
@@ -108,7 +122,7 @@
                             </div>
 
                             @if($Sermons->video == null)
-                            <!--church music player-->
+                         
                             <div class="audioplayer style_audio_2">
                                 <audio
                                     controls
@@ -118,7 +132,7 @@
                                 </audio> 
              
                             </div>
-                            <!--church music player ends-->
+                        
                             @else 
 
                             @endif
@@ -130,7 +144,7 @@
                   
                 </div>
             </div>
-        </section>
+        </section> --}}
 
        
     </div>
