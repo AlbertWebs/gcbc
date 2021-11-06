@@ -9,6 +9,48 @@
         <h3>Sermons</h3>
     <hr>
     </div>
+        {{--  --}}
+        <section>
+            <div class="container">
+                <div class="row">
+                    @foreach($Sermons as $sermons)
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="church_causes_columns">
+                            {{-- <figure> --}}
+                                <iframe width="300" height="349" src="https://www.youtube.com/embed/{{$sermons->video}}?rel=0&hd=1" frameborder="0" allowfullscreen></iframe>
+                                
+                                {{-- <div class="church_absolute_middel">
+                                    <ul class="meta_address">
+                                        <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i> Jason Adam</a></li>
+                                        <li><a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i>5/16/2017</a></li>
+                                    </ul>
+                                </div> --}}
+                            {{-- </figure> --}}
+                            <div class="church_blog_content">
+                                <div class="church_causes2_caption">
+                                    <h4><a href="#">{{$sermons->title}}</a></h4>
+                                    <p>{{$sermons->meta}}</p>
+                                </div>
+                                {{-- <div class="chu_progress_causes">
+                                    <div class="skillbar1 clearfix" data-percent="20%">
+                                        <div class="skillbar1-bar bar_2"><span>20%</span></div>
+                                    </div>
+                                </div> --}}
+                                <div class="chu-detail_donars">
+                                    <ul class="donars_right">
+                                        <li><small>{{$sermons->books}}</small></li>
+                                        <li><small><?php $Admin = App\Admin::find($sermons->author) ?> {{$Admin->name}}</small></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>	
+                    @endforeach
+                </div>
+            </div>
+        </section>
+
+        {{--  --}}
 
         <section>
             <div class="container">

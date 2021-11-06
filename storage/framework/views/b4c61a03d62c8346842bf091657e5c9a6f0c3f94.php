@@ -8,6 +8,39 @@
         <h3>Sermons</h3>
     <hr>
     </div>
+        
+        <section>
+            <div class="container">
+                <div class="row">
+                    <?php $__currentLoopData = $Sermons; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sermons): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="church_causes_columns">
+                            
+                                <iframe width="300" height="349" src="https://www.youtube.com/embed/<?php echo e($sermons->video); ?>?rel=0&hd=1" frameborder="0" allowfullscreen></iframe>
+                                
+                                
+                            
+                            <div class="church_blog_content">
+                                <div class="church_causes2_caption">
+                                    <h4><a href="#"><?php echo e($sermons->title); ?></a></h4>
+                                    <p><?php echo e($sermons->meta); ?></p>
+                                </div>
+                                
+                                <div class="chu-detail_donars">
+                                    <ul class="donars_right">
+                                        <li><small><?php echo e($sermons->books); ?></small></li>
+                                        <li><small><?php $Admin = App\Admin::find($sermons->author) ?> <?php echo e($Admin->name); ?></small></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>	
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </div>
+            </div>
+        </section>
+
+        
 
         <section>
             <div class="container">
