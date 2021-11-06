@@ -143,6 +143,41 @@
                         </div>
     
                         {{--  --}}
+
+                          {{--  --}}
+                          <div class="form-group">
+                            <label class="control-label col-lg-4">Audio</label>
+        
+                            
+                                
+        
+                            <div class="col-lg-8">
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+
+
+
+                                    <div class="input-group">
+                                        
+    
+                                        <span class="btn btn-file btn-info">
+                                            <span class="fileupload-new">Select file</span>
+                                            <span class="fileupload-exists">Change</span>
+                                            <input name="audio" type="file" />
+                                        </span> 
+                                        <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                        
+                                        <br /> <br />
+                                        <div class="col-lg-3">
+                                            <i class="icon-file fileupload-exists"></i>
+                                            <span class="fileupload-preview"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                        </div>
+    
+                        {{--  --}}
           
                         <div class="col-lg-12">
                             <div class="box">

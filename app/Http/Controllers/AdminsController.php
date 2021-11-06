@@ -1452,6 +1452,21 @@ public function addSermon(){
 public function add_Sermon(Request $request){
 
     $path = 'uploads/sermons';
+    if(isset($request->audio)){
+        
+            
+        $file = $request->file('audio');
+        $filename = str_replace(' ', '', $file->getClientOriginalName());
+        $timestamp = new Datetime();
+        $new_timestamp = $timestamp->format('Y-m-d H:i:s');
+        $audio_main_temp = $new_timestamp.'audio'.$filename;
+        $audio = str_replace(' ', '',$audio_main_temp);
+        $file->move($path, $audio);
+        
+    }else{
+        $audio = null;
+    }
+
     if(isset($request->image_one)){
         
             
@@ -1484,7 +1499,8 @@ public function add_Sermon(Request $request){
     }
 
     
-  
+    $url = "https://gracecommunitybiblechurch.org";
+
 
     $Sermon = new Sermon;
     $Sermon->slung = Str::slug($request->title);
@@ -1492,6 +1508,8 @@ public function add_Sermon(Request $request){
     $Sermon->content = $request->content;
     $Sermon->author = $request->author;
     $Sermon->meta = $request->meta;
+    $Sermon->audio = "$url/uploads/sermons/$audio";
+    
     $Sermon->books = $request->books;
     $Sermon->author = $request->agent;
     $Sermon->video = $request->video;
@@ -1525,6 +1543,23 @@ public function editSermon($id){
 public function edit_Sermon(Request $request, $id){
 
     $path = 'uploads/sermons';
+
+    
+    if(isset($request->audio)){
+        
+            
+        $file = $request->file('audio');
+        $filename = str_replace(' ', '', $file->getClientOriginalName());
+        $timestamp = new Datetime();
+        $new_timestamp = $timestamp->format('Y-m-d H:i:s');
+        $audio_main_temp = $new_timestamp.'audio'.$filename;
+        $audio = str_replace(' ', '',$audio_main_temp);
+        $file->move($path, $audio);
+        
+    }else{
+        $audio = $request->image_one_cheat;
+    }
+
     if(isset($request->image_one)){
         
             
@@ -1558,7 +1593,7 @@ public function edit_Sermon(Request $request, $id){
     
   
 
-
+    $url = "https://gracecommunitybiblechurch.org";
 
     $updateDetails = array(
         'slung' =>Str::slug($request->title),
@@ -1567,6 +1602,7 @@ public function edit_Sermon(Request $request, $id){
         'meta' =>$request->meta,
         'books' =>$request->books,
         'author' =>$request->agent,
+        'audio' =>"$url/uploads/sermons/$audio",
         'video' =>$request->video,
         'image' =>$image_one,
         'file' =>$image_file,
