@@ -20,18 +20,25 @@
                         <a href="{{url('/')}}/our-sermons" class="default_btn border-white">Sermons</a>
                         {{--  --}}
                         <a href="{{url('/')}}/our-programs" class="default_btn border-white">View Schedule</a>
-                         <a target="new" href="https://www.facebook.com/gracecommunitybiblechurchke/live/" class="default_btn border-white"><span class="fa fa-video-camera"></span>  Watch Live</a>
+                         {{-- <a target="new" href="https://www.facebook.com/gracecommunitybiblechurchke/live/" class="default_btn border-white"><span class="fa fa-video-camera"></span>  Watch Live</a> --}}
                    
                         <?php 
                            $dt = \Carbon\Carbon::now();
                            $start = \Carbon\Carbon::createFromTimeString('09:00');
                            $end = \Carbon\Carbon::createFromTimeString('23:00');
-                           $now = \Carbon\Carbon::now();
+
+                        //    $date = '2011-01-01';
+                            $timestamp = strtotime($dt);
+                            $weekday= date("l", $timestamp );
+                            $normalized_weekday = strtolower($weekday);
+                            // echo $normalized_weekday ;
+                           
+                           
                          ?>
-                         @if(date('w', strtotime($dt)) == 7) 
-                            @if ($now->between($start, $end)) 
+                         @if($normalized_weekday == "sunday")
+                            {{-- @if ($dt->between($start, $end))  --}}
                             <a target="new" href="https://www.facebook.com/gracecommunitybiblechurchke/live/" class="default_btn border-white"><span class="fa fa-video-camera"></span>  Watch Live</a>
-                            @endif
+                            {{-- @endif --}}
                          @endif
                        
                     </div>

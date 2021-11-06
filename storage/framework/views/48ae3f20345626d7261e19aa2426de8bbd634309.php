@@ -19,18 +19,25 @@
                         <a href="<?php echo e(url('/')); ?>/our-sermons" class="default_btn border-white">Sermons</a>
                         
                         <a href="<?php echo e(url('/')); ?>/our-programs" class="default_btn border-white">View Schedule</a>
-                         <a target="new" href="https://www.facebook.com/gracecommunitybiblechurchke/live/" class="default_btn border-white"><span class="fa fa-video-camera"></span>  Watch Live</a>
+                         
                    
                         <?php 
                            $dt = \Carbon\Carbon::now();
                            $start = \Carbon\Carbon::createFromTimeString('09:00');
                            $end = \Carbon\Carbon::createFromTimeString('23:00');
-                           $now = \Carbon\Carbon::now();
+
+                        //    $date = '2011-01-01';
+                            $timestamp = strtotime($dt);
+                            $weekday= date("l", $timestamp );
+                            $normalized_weekday = strtolower($weekday);
+                            // echo $normalized_weekday ;
+                           
+                           
                          ?>
-                         <?php if(date('w', strtotime($dt)) == 7): ?> 
-                            <?php if($now->between($start, $end)): ?> 
+                         <?php if($normalized_weekday == "sunday"): ?>
+                            
                             <a target="new" href="https://www.facebook.com/gracecommunitybiblechurchke/live/" class="default_btn border-white"><span class="fa fa-video-camera"></span>  Watch Live</a>
-                            <?php endif; ?>
+                            
                          <?php endif; ?>
                        
                     </div>
