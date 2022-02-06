@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Redirect; 
+use Illuminate\Support\Facades\Redirect;
 
 use App\Message;
 use App\Notifications;
@@ -19,7 +19,7 @@ use DB;
 
 class HomeController extends Controller
 {
-  
+
     public function index()
     {
         // List videos in a given channel, return an array of PHP objects
@@ -36,6 +36,10 @@ class HomeController extends Controller
         $Events = DB::table('blogs')->whereDate('date', '>=', Carbon::now()->toDateString())->get();
         $title="Grace Community Bible Church | Welcome to GCBC";
         return view('front.index',compact('title','Events'));
+    }
+
+    public function calendar(){
+
     }
 
 
@@ -59,8 +63,8 @@ class HomeController extends Controller
         $About = DB::table('about')->get();
         return view('front.objectives',compact('title','About'));
     }
-    
-    
+
+
 
 
     public function contact()
@@ -84,9 +88,9 @@ class HomeController extends Controller
         return view('front.register',compact('title','Blogs'));
     }
 
-    
 
-  
+
+
     public function sermons()
     {
         $title="Our Sermons | Grace Community Bible Church";
@@ -122,9 +126,9 @@ class HomeController extends Controller
         return view('front.give_paybill',compact('title','Ministries'));
     }
 
-    
-    
-    
+
+
+
     public function sermon($slung)
     {
         $title="Our Sermons | Grace Community Bible Church";
@@ -132,9 +136,9 @@ class HomeController extends Controller
         return view('front.sermon',compact('title','Sermons'));
     }
 
-    
 
-    
+
+
     public function blogs()
     {
         $Blog = DB::table('blogs')->get();
@@ -144,7 +148,7 @@ class HomeController extends Controller
 
     public function blog($slung)
     {
-        
+
         $Blog = DB::table('blogs')->where('slung',$slung)->get();
         foreach ($Blog as $key => $value) {
             # code...
@@ -158,8 +162,8 @@ class HomeController extends Controller
     }
 
 
-  
-    
+
+
 
     public function send_message(Request $request){
         if(isset($request->firstnamer)){
@@ -191,15 +195,15 @@ class HomeController extends Controller
                     Thank you $name,<br>
                     Your message has been submitted. We will contact you shortly.
             ";
-    
-        
+
+
             return Redirect::back();
         }
 
 
     }
 
-    
+
     public function register_now(Request $request){
         $name = $request->name;
         $email = $request->email;
@@ -227,8 +231,8 @@ class HomeController extends Controller
                 Thank you $name,<br>
                 Your message has been submitted. We will contact you shortly.
         ";
-  
-    
+
+
         return Redirect::back();
 
 
@@ -255,5 +259,5 @@ class HomeController extends Controller
         return view('front.copyrights',compact('title','Copyright'));
     }
 
-    
+
 }

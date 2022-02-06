@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CalendarController;
+use App\Http\Livewire\Calendar;
+use App\Models\Event;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +20,9 @@ use App\Http\Controllers\HomeController;
 Route::get('/','HomeController@index');
 Route::get('/about-us','HomeController@about');
 Route::get('/give-now','HomeController@give_now');
+Route::get('/our-calendar','CalendarController@calendar');
+
+
 Route::get('/give-paybill','HomeController@give_paybill');
 Route::get('/ministries','HomeController@ministries');
 Route::get('/ministries/{slung}','HomeController@ministry');
@@ -41,7 +47,7 @@ Auth::routes();
 
 Route::group(['prefix'=>'admin'], function(){
 
-  
+
 //Login route
 
 Route::get('/login','Auth\AdminLoginController@showLoginForm')->name('admin.login');
@@ -65,7 +71,7 @@ Route::get('/addPrivacy', 'AdminsController@addPrivacy');
 Route::get('/editPrivacy/{id}', 'AdminsController@editPrivacy');
 Route::post('/add_privacy', 'AdminsController@add_privacy');
 Route::get('/delete_privacy/{id}','AdminsController@delete_privacy');
-Route::post('/edit_privacy/{id}', 'AdminsController@edit_privacy'); 
+Route::post('/edit_privacy/{id}', 'AdminsController@edit_privacy');
 //Terms
 Route::get('/terms','AdminsController@terms');
 Route::get('/addTerms', 'AdminsController@addTerms');
@@ -109,6 +115,15 @@ Route::get('/deleteCategory/{id}','AdminsController@deleteCategory');
 Route::post('/edit_Category/{id}', 'AdminsController@edit_Category');
 Route::get('/addCategory', 'AdminsController@addCategory');
 Route::post('/add_Category', 'AdminsController@add_Category');
+
+
+//Event Control
+Route::get('/events','AdminsController@events');
+Route::get('/editEvent/{id}','AdminsController@editEvent');
+Route::get('/deleteEvent/{id}','AdminsController@deleteEvent');
+Route::post('/edit_Event/{id}', 'AdminsController@edit_Event');
+Route::get('/addEvent', 'AdminsController@addEvent');
+Route::post('/add_Event', 'AdminsController@add_Event');
 
 Route::get('/deleteImage/{id}/{image}/{table}', 'AdminsController@deleteImage');
 
@@ -187,3 +202,8 @@ Route::post('/add_Gallery', 'AdminsController@add_Gallery');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Livewire::component('calendar', Calendar::class);
+
+Route::get('/getevent', 'FullCalendarController@getEvent');
+Route::post('/createevent','FullCalendarController@createEvent');
+Route::post('/deleteevent','FullCalendarController@deleteEvent');

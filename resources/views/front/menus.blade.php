@@ -15,7 +15,7 @@
                 <button class="dl-trigger">Menu</button>
                     <ul class="dl-menu">
                         <li class="active"><a  href="{{url('/')}}">Home</a>
-                            
+
                         </li>
                         <li><a  href="{{url('/')}}/about-us">About Us</a>
                             <ul class="children submenu">
@@ -27,29 +27,29 @@
                             </ul>
                         </li>
                         <li><a href="{{url('/')}}/our-sermons">Our Sermons</a>
-                           
+
                         </li>
                         <li><a href="{{url('/')}}/news-and-events">News & Events</a>
-                            
+
                         </li>
-                   
-                    
+
+
                         <li><a href="{{url('our-programs')}}">Schedule</a></li>
                         {{-- <li><a href="{{url('give-now')}}">Give</a></li> --}}
                         <li><a  href="{{url('/')}}/give-paybill">Give</a>
-                            
+
                         </li>
                         <li><a href="{{url('/')}}/contact-us">contact us</a></li>
                     </ul>
             </div>
             <!--Responsive Menu END-->
-            
+
             <!--church logo ends-->
             <div class="church_navigation pull-right">
-                <nav class="navigation">                                                          
+                <nav class="navigation">
                     <ul>
                         <li class="active"><a  href="{{url('/')}}">Home</a>
-                            
+
                         </li>
                         <li><a  href="{{url('/')}}/about-us">About Us</a>
                             <ul class="children submenu">
@@ -61,25 +61,29 @@
                             </ul>
                         </li>
                         <li><a href="{{url('/')}}/our-sermons">Our Sermons</a>
-                           
+
                         </li>
                         <li><a href="{{url('/')}}/news-and-events">News & Events</a>
-                            
+
                         </li>
-                   
-                    
+
+                        <li><a href="{{url('/')}}/our-calendar">Calendar</a>
+
+                        </li>
+
+
                         <li><a href="{{url('our-programs')}}">Schedule</a></li>
                         {{-- <li><a href="{{url('give-now')}}">Give</a></li> --}}
                         <li><a  href="{{url('/')}}/give-paybill">Give</a>
-                            
+
                         </li>
                         <li><a href="{{url('/')}}/contact-us">contact us</a></li>
                     </ul>
                 </nav>
             </div>
-             
-        </div>        
-    </div>    
+
+        </div>
+    </div>
 
 </header>
 <!--church header ends-->

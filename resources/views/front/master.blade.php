@@ -2,7 +2,7 @@
 @foreach ($SiteSettings as $Settings)
 <!DOCTYPE html>
 <html lang="en">
-  
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,8 +15,8 @@
     <meta name="keywords" content="Grace Community Bible Church" />
     <meta name="author" content="Grace Community Bible Church" />
     <link rel="canonical" href="https://gracecommunitybiblechurch.org/"/>
-    
- 
+
+
     <meta property="og:description" content="Grace Community Bible Church (GCBC) is a Southern Baptist church in affiliation and in doctrine. This ministry operates in partnership with the Baptist Convention of Kenya, yet we are ready to work with other like-minded churches in the area. - Grace Community Bible Church">
     <meta property="og:image" content="https://gracecommunitybiblechurch.org/uploads/logo/GCBC LOGO D-01.png" />
     <meta property="og:image:secure_url" content="https://gracecommunitybiblechurch.org/uploads/logo/GCBC LOGO D-01.png">
@@ -58,13 +58,13 @@
        @include('front.menus')
 
 
-       
 
-        @yield('content')  
+
+        @yield('content')
         @include('front.footer')
-		
+
 	    @include('front.copyrights_section')
-		
+
         <!--video deta-->
         <div id="v1" class="videos_play_modal modal fade" role="dialog">
             <div class="modal-dialog">
@@ -99,7 +99,7 @@
     <script src="{{asset('theme/js/custom.js')}}"></script>
 
     <script>
-      
+
     </script>
   </body>
 

@@ -2,7 +2,7 @@
 
 @section('content')
 <div id="wrap" >
-        
+
 
         <!-- HEADER SECTION -->
         @include('admin.top')
@@ -18,13 +18,13 @@
 
         <!--PAGE CONTENT -->
         <div id="content">
-             
+
             <div class="inner" style="min-height: 700px;">
                 <div class="row">
                     <div class="col-lg-12">
-                        
+
                         <center><h2> Add Event </h2></center>
-                        
+
                     </div>
                 </div>
                   <hr />
@@ -38,12 +38,12 @@
                 </div>
                   <!--END BLOCK SECTION -->
                 <hr />
-                
-               
+
+
                   <!-- Inner Content Here -->
-                 
+
             <div class="inner">
-                
+
 
               <div class="row">
                <center>
@@ -55,10 +55,10 @@
 							   <div class="alert alert-danger">{{ Session::get('messageError') }}</div>
 				@endif
                  </center>
-                 
+
 
                  <form class="form-horizontal" method="post"  action="{{url('/admin/add_Event')}}" enctype="multipart/form-data">
-                    
+
                  <div class="form-group">
                         <label for="text1" class="control-label col-lg-4">Title</label>
 
@@ -67,49 +67,34 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="text1" class="control-label col-lg-4">Venue</label>
 
-                        <div class="col-lg-8">
-                            <input type="text" id="text1" name="venue"  placeholder="e.g Mombasa" class="form-control" />
-                        </div>
-                    </div>
+
+
+
 
                     <div class="form-group">
-                        <label class="control-label col-lg-4">Start</label>
+                        <label class="control-label col-lg-4" >Start Date</label>
 
                         <div class="col-lg-8">
-                            <div class="input-group bootstrap-timepicker">
-                                <input  name="start" class="form-control timepicker-default" type="text" />
-                                <span class="input-group-addon add-on"><i class="icon-time"></i></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-lg-4">Stop</label>
-
-                        <div class="col-lg-8">
-                            <div class="input-group bootstrap-timepicker">
-                                <input name="stop"  class="form-control timepicker-default" type="text" />
-                                <span class="input-group-addon add-on"><i class="icon-time"></i></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-lg-4" >Date</label>
-
-                        <div class="col-lg-8">
-                            <div class="input-group input-append  date" id="dpYears" data-date="12-02-2012"
-                                 data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-                                <input name="date"  class="form-control" type="text" value="12-02-2012" readonly="" />
+                            <div class="input-group">
+                                <input required name="start"  class="form-control" type="date" />
                                 <span class="input-group-addon add-on"><i class="icon-calendar"></i></span>
                             </div>
                         </div>
                     </div>
 
-                    
+                    <div class="form-group">
+                        <label class="control-label col-lg-4" >End Date</label>
+
+                        <div class="col-lg-8">
+                            <div class="input-group">
+                                <input required name="end"  class="form-control" type="date" />
+                                <span class="input-group-addon add-on"><i class="icon-calendar"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+
 
                     <div class="form-group">
                         <label for="text1" class="control-label col-lg-4">Author</label>
@@ -119,10 +104,10 @@
                         </div>
                     </div>
 
-                   
-                     
-          
-                        <div class="col-lg-12">
+
+
+
+                        {{-- <div class="col-lg-12">
                             <div class="box">
                                 <header>
                                     <div class="icons"><i class="icon-th-large"></i></div>
@@ -143,17 +128,17 @@
                                     </ul>
                                 </header>
                                 <div id="div-1" class="body collapse in">
-                                    
+
                                         <textarea name="content" id="wysihtml5" class="form-control" rows="10"></textarea>
 
-                                    
+
                                 </div>
                             </div>
-                        </div>
-                   
+                        </div> --}}
+
                     <center>
                     <div class="form-group col-lg-12">
-                    <div class="form-group col-lg-12">
+                    {{-- <div class="form-group col-lg-12">
                         <label class="control-label">Image One(Main)</label>
                         <div class="">
                             <div class="fileupload fileupload-new" data-provides="fileupload">
@@ -165,11 +150,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
-                  
+                    </div> --}}
 
-                   
+
+
+
                     </div>
                     </center>
                     <br><br>
@@ -177,10 +162,10 @@
                       <button type="submit" class="btn btn-success"><i class="icon-check icon-white"></i> Save </button>
                     </div>
                     <input type="hidden" name="image_one_cheat" value="0">
-                   
-                    
+
+
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    
+
                 <form>
               </div>
 
@@ -189,7 +174,7 @@
 
 
 
-                
+
             </div>
 
         </div>

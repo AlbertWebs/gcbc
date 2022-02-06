@@ -1,17 +1,15 @@
-@extends('admin.master')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div id="wrap" >
 
 
         <!-- HEADER SECTION -->
-        @include('admin.top')
+        <?php echo $__env->make('admin.top', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <!-- END HEADER SECTION -->
 
 
 
         <!-- MENU SECTION -->
-        @include('admin.left')
+        <?php echo $__env->make('admin.left', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <!--END MENU SECTION -->
 
 
@@ -31,7 +29,7 @@
                  <!--BLOCK SECTION -->
                  <div class="row">
                     <div class="col-lg-12">
-                        @include('admin.panel')
+                        <?php echo $__env->make('admin.panel', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
                     </div>
 
@@ -53,34 +51,30 @@
                                                 <tr>
                                                     <th>No</th>
                                                     <th>Title</th>
-                                                    {{-- <th>Author</th> --}}
-                                                    {{-- <th>Image</th> --}}
+                                                    
+                                                    
                                                     <th>Edit</th>
                                                     <th>Delete</th>
 
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($Event as $value)
+                                            <?php $__currentLoopData = $Event; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <tr class="odd gradeX">
-                                                    <td>{{$value->id}}</td>
-                                                    <td>{{$value->title}}</td>
-                                                    {{-- <td>{{$value->author}}</td> --}}
-                                                    {{-- <td class="center"><img width="80" height="80" src="{{url('/')}}/uploads/events/{{$value->image}}"></td> --}}
+                                                    <td><?php echo e($value->id); ?></td>
+                                                    <td><?php echo e($value->title); ?></td>
+                                                    
+                                                    
                                                     <td class="center">
                                                     <center>
-                                                        <a href="{{url('/admin')}}/editEvent/{{$value->id}}"   class="btn btn-info"><i class="icon-pencil icon-white"></i> Edit</a><br><br>
-                                                        {{-- @if($value->status == 1)
-                                                        <a href="{{url('/admin')}}/swapevent/{{$value->id}}"   class="btn btn-success"><i class="icon-exchange icon-white"></i> Mark As Past</a></td>
-                                                        @else
-                                                        <a href="{{url('/admin')}}/swapevent/{{$value->id}}"   class="btn btn-danger"><i class="icon-exchange icon-white"></i> UnMark as Past</a></td>
-                                                        @endif --}}
+                                                        <a href="<?php echo e(url('/admin')); ?>/editEvent/<?php echo e($value->id); ?>"   class="btn btn-info"><i class="icon-pencil icon-white"></i> Edit</a><br><br>
+                                                        
 
                                                     </center>
-                                                    <td class="center"><a onclick="return confirm('Do you want to delete this Post?')" href="{{url('/admin')}}/delete_Event/{{$value->id}}"   class="btn btn-danger"><i class="icon-trash icon-white"></i> Del</a></td>
+                                                    <td class="center"><a onclick="return confirm('Do you want to delete this Post?')" href="<?php echo e(url('/admin')); ?>/delete_Event/<?php echo e($value->id); ?>"   class="btn btn-danger"><i class="icon-trash icon-white"></i> Del</a></td>
 
                                                 </tr>
-                                            @endforeach
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                                             </tbody>
                                         </table>
@@ -102,8 +96,10 @@
         <!--END PAGE CONTENT -->
 
          <!-- RIGHT STRIP  SECTION -->
-         @include('admin.right')
+         <?php echo $__env->make('admin.right', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
          <!-- END RIGHT STRIP  SECTION -->
     </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/designekta/gcbc/resources/views/admin/events.blade.php ENDPATH**/ ?>

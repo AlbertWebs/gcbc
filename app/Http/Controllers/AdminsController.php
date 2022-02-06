@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Auth;
 
-use Illuminate\Support\Facades\Redirect; 
+use Illuminate\Support\Facades\Redirect;
 
 use Illuminate\Support\Str;
 
@@ -26,6 +26,8 @@ use datetime;
 use App\Term;
 
 use App\Models\Models;
+
+use App\Models\Event;
 
 use App\Privacy;
 
@@ -79,13 +81,13 @@ class AdminsController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Http\Response 
+     * @return \Illuminate\Http\Response
      */
-    
+
     //  Home Page
     public function index(){
         $Message = DB::table('messages')->where('status','0')->get();
- 
+
         $page_title = 'Admin Home';
         $page_name = 'Admin Home';
         return view('admin.index',compact('page_title','page_name','Message'));
@@ -130,7 +132,7 @@ class AdminsController extends Controller
             'sitename'=>$request->sitename,
             'logo'=>$logo,
             'logoo'=>$logoo,
-            'favicon'=>$favicon, 
+            'favicon'=>$favicon,
             'email'=>$request->email,
             'email_one'=>$request->email_one,
             'mobile'=>$request->mobile,
@@ -151,7 +153,7 @@ class AdminsController extends Controller
             'google'=>$request->google,
 
             'welcome'=>$request->welcome
-            
+
         );
         DB::table('sitesettings')->update($updateDetails);
         Session::flash('message', "Changes have Been Saved");
@@ -194,14 +196,14 @@ class AdminsController extends Controller
 
             'vision' => $request->support,
             'mission' => $request->handpicked,
-            
+
         );
         DB::table('about')->update($updateDetails);
 
         Session::flash('message', "Changes have Been Saved");
         return Redirect::back();
     }
-    // 
+    //
     public function abouts(){
         $About = DB::table('about')->get();
         $page_title = 'formfiletext';//For Style Inheritance
@@ -209,7 +211,7 @@ class AdminsController extends Controller
         return view('admin.abouts',compact('page_title','page_name','About'));
     }
     public function abouts_save(Request $request){
-       
+
         $updateDetails = array(
             'contents'=>$request->content,
 
@@ -220,7 +222,7 @@ class AdminsController extends Controller
         return Redirect::back();
     }
 
-    // 
+    //
 
 
     public function addTerms(){
@@ -289,7 +291,7 @@ class AdminsController extends Controller
         $Privacy = Privacy::find($id);
         $page_name = $Privacy->title;
         $page_title = 'formfiletext';//For Style Inheritance
-        
+
         return view('admin.editPrivacy')->with('Privacy',$Privacy)->with('page_name',$page_name)->with('page_title',$page_title);
     }
 
@@ -316,12 +318,12 @@ class AdminsController extends Controller
 
     public function add_Admin(Request $request){
         $path = 'uploads/admins';
-        
+
         $file = $request->file('image');
         $filename = $file->getClientOriginalName();
         $file->move($path, $filename);
         $image = $filename;
-        
+
         $password_inSecured = $request->password;
         //harshing password Here
         $password = Hash::make($password_inSecured);
@@ -347,7 +349,7 @@ class AdminsController extends Controller
         $Admin = Admin::find($newID);
         $page_title = 'formfiletext';//For Style Inheritance
         $page_name = 'Edit Site Administrator';
-       
+
         return view('admin.editAdmin',compact('page_title','Admin','page_name'));
     }
 
@@ -355,8 +357,8 @@ class AdminsController extends Controller
         $path = 'uploads/admins';
         if($request->email == Auth::user()->email ){
             if(isset($request->image)){
-               
-                   
+
+
                     $file = $request->file('image');
                     $filename = str_replace(' ', '', $file->getClientOriginalName());
                     $timestamp = new Datetime();
@@ -364,7 +366,7 @@ class AdminsController extends Controller
                     $image_main_temp = $new_timestamp.'image'.$filename;
                     $image = str_replace(' ', '',$image_main_temp);
                     $file->move($path, $image);
-                
+
             }else{
                 $image = $request->image_cheat;
             }
@@ -386,8 +388,8 @@ class AdminsController extends Controller
             return Redirect::back();
         }else{
             if(isset($request->image)){
-               
-                   
+
+
                     $file = $request->file('image');
                     $filename = str_replace(' ', '', $file->getClientOriginalName());
                     $timestamp = new Datetime();
@@ -395,7 +397,7 @@ class AdminsController extends Controller
                     $image_main_temp = $new_timestamp.'image'.$filename;
                     $image = str_replace(' ', '',$image_main_temp);
                     $file->move($path, $image);
-                
+
             }else{
                 $image = $request->image_cheat;
             }
@@ -417,12 +419,12 @@ class AdminsController extends Controller
             return Redirect::back();
         }
     }
-    
+
 
     public function deleteAdmin($id){
         if($id==1){
             echo "<script>alert('You cannot Delete the Supper Admin)</script>";
-            
+
             return Redirect::back();
         }else{
             DB::table('admins')->where('id',$id)->delete();
@@ -444,13 +446,13 @@ class AdminsController extends Controller
         $page_name = 'Site Banner';
         return view('admin.editBanner',compact('page_title','Banner','page_name'));
     }
-    
+
     public function edit_Banner(Request $request, $id){
         $path = 'uploads/banners';
         if(isset($request->image)){
             $file = $request->file('image');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
-            
+
             $file->move($path, $filename);
             $image = $filename;
         }else{
@@ -489,7 +491,7 @@ class AdminsController extends Controller
         $subject = $request->subject;
         $name = $request->name;
         $email = $request->email;
-        
+
         //Call The Generic Reply Class
         ReplyMessage::SendMessage($reply,$subject,$name,$email,$id);
     }
@@ -498,7 +500,7 @@ class AdminsController extends Controller
         return Redirect::back();
     }
 
-        
+
 public function categories(){
     $Category = Category::all();
     $page_title = 'list';
@@ -513,10 +515,10 @@ public function addCategory(){
 }
 
 public function add_Category(Request $request){
-    
+
     $Category = new Category;
     $Category->cat = $request->name;
-    
+
     $Category->save();
     Session::flash('message', "Category Has Been Added");
     return Redirect::back();
@@ -543,7 +545,7 @@ public function edit_Category(Request $request, $id){
         'cat'=>$request->name,
         // 'description'=>$request->content,
         'image'=>$image
-      
+
     );
     DB::table('category')->where('id',$id)->update($updateDetails);
     Session::flash('message', "Changes have been saved");
@@ -566,8 +568,8 @@ public function add_Product(Request $request){
 
     $path = 'uploads/product';
     if(isset($request->image_one)){
-        
-            
+
+
             $file = $request->file('image_one');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -575,14 +577,14 @@ public function add_Product(Request $request){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_one = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_one);
-            
+
     }else{
         $image_one = $request->pro_img_cheat;
     }
 
     if(isset($request->image_two)){
-        
-            
+
+
             $file = $request->file('image_two');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -590,16 +592,16 @@ public function add_Product(Request $request){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_two = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_two);
-         
+
     }else{
         $image_two = $request->pro_img_cheat;
     }
 
-    
+
     if(isset($request->image_three)){
         $fileSize = $request->file('image_three');
-       
-           
+
+
             $file = $request->file('image_three');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -607,15 +609,15 @@ public function add_Product(Request $request){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_three = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_three);
-        
+
     }else{
         $image_three = $request->pro_img_cheat;
     }
 
     if(isset($request->image_four)){
         $fileSize = $request->file('image_four');
-       
-           
+
+
             $file = $request->file('image_four');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -623,15 +625,15 @@ public function add_Product(Request $request){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_four = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_four);
-        
+
     }else{
         $image_four = $request->pro_img_cheat;
     }
 
     if(isset($request->image_five)){
         $fileSize = $request->file('image_five');
-       
-           
+
+
             $file = $request->file('image_five');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -639,15 +641,15 @@ public function add_Product(Request $request){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_five = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_five);
-        
+
     }else{
         $image_five = $request->pro_img_cheat;
     }
 
     if(isset($request->image_six)){
         $fileSize = $request->file('image_six');
-       
-           
+
+
             $file = $request->file('image_six');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -655,15 +657,15 @@ public function add_Product(Request $request){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_six = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_six);
-        
+
     }else{
         $image_six = $request->pro_img_cheat;
     }
 
     if(isset($request->image_seven)){
         $fileSize = $request->file('image_seven');
-       
-           
+
+
             $file = $request->file('image_seven');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -671,15 +673,15 @@ public function add_Product(Request $request){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_seven = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_seven);
-        
+
     }else{
         $image_seven = $request->pro_img_cheat;
     }
 
     if(isset($request->image_eight)){
         $fileSize = $request->file('image_eight');
-       
-           
+
+
             $file = $request->file('image_eight');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -687,15 +689,15 @@ public function add_Product(Request $request){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_eight = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_eight);
-        
+
     }else{
         $image_eight = $request->pro_img_cheat;
     }
 
     if(isset($request->image_nine)){
         $fileSize = $request->file('image_nine');
-       
-           
+
+
             $file = $request->file('image_nine');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -703,15 +705,15 @@ public function add_Product(Request $request){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_nine = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_nine);
-        
+
     }else{
         $image_nine = $request->pro_img_cheat;
     }
 
     if(isset($request->image_ten)){
         $fileSize = $request->file('image_ten');
-       
-           
+
+
             $file = $request->file('image_ten');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -719,15 +721,15 @@ public function add_Product(Request $request){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_ten = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_ten);
-        
+
     }else{
         $image_ten = $request->pro_img_cheat;
     }
 
     if(isset($request->slider)){
         $fileSize = $request->file('slider');
-       
-           
+
+
             $file = $request->file('slider');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -735,12 +737,12 @@ public function add_Product(Request $request){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $slider = str_replace(' ', '',$image_main_temp);
             $file->move($path, $slider);
-        
+
     }else{
         $slider = $request->pro_img_cheat;
     }
     //Additional images
-    
+
 
     $Product = new Product;
     $Product->name = $request->name;
@@ -770,9 +772,9 @@ public function add_Product(Request $request){
     $Product->image_eight = $image_eight;
     $Product->image_nine = $image_nine;
     $Product->image_ten = $image_ten;
- 
+
     $Product->save();
-    
+
     Session::flash('message', "You have Added One New Product");
     return Redirect::back();
 }
@@ -799,8 +801,8 @@ public function edit_Product(Request $request, $id){
 
     $path = 'uploads/product';
     if(isset($request->image_one)){
-        
-            
+
+
             $file = $request->file('image_one');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -808,14 +810,14 @@ public function edit_Product(Request $request, $id){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_one = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_one);
-            
+
     }else{
         $image_one = $request->image_one_cheat;
     }
 
     if(isset($request->image_two)){
-        
-            
+
+
             $file = $request->file('image_two');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -823,16 +825,16 @@ public function edit_Product(Request $request, $id){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_two = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_two);
-         
+
     }else{
         $image_two = $request->image_two_cheat;
     }
 
-    
+
     if(isset($request->image_three)){
         $fileSize = $request->file('image_three');
-       
-           
+
+
             $file = $request->file('image_three');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -840,15 +842,15 @@ public function edit_Product(Request $request, $id){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_three = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_three);
-        
+
     }else{
         $image_three = $request->image_three_cheat;
     }
 
     if(isset($request->image_four)){
         $fileSize = $request->file('image_four');
-       
-           
+
+
             $file = $request->file('image_four');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -856,15 +858,15 @@ public function edit_Product(Request $request, $id){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_four = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_four);
-        
+
     }else{
         $image_four = $request->image_four_cheat;
     }
 
     if(isset($request->image_five)){
         $fileSize = $request->file('image_five');
-       
-           
+
+
             $file = $request->file('image_five');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -872,15 +874,15 @@ public function edit_Product(Request $request, $id){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_five = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_five);
-        
+
     }else{
         $image_five = $request->image_five_cheat;
     }
 
     if(isset($request->image_six)){
         $fileSize = $request->file('image_six');
-       
-           
+
+
             $file = $request->file('image_six');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -888,15 +890,15 @@ public function edit_Product(Request $request, $id){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_six = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_six);
-        
+
     }else{
         $image_six = $request->image_six_cheat;
     }
 
     if(isset($request->image_seven)){
         $fileSize = $request->file('image_seven');
-       
-           
+
+
             $file = $request->file('image_seven');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -904,15 +906,15 @@ public function edit_Product(Request $request, $id){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_seven = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_seven);
-        
+
     }else{
         $image_seven = $request->image_seven_cheat;
     }
 
     if(isset($request->image_eight)){
         $fileSize = $request->file('image_eight');
-       
-           
+
+
             $file = $request->file('image_eight');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -920,15 +922,15 @@ public function edit_Product(Request $request, $id){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_eight = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_eight);
-        
+
     }else{
         $image_eight = $request->image_eight_cheat;
     }
 
     if(isset($request->image_nine)){
         $fileSize = $request->file('image_nine');
-       
-           
+
+
             $file = $request->file('image_nine');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -936,15 +938,15 @@ public function edit_Product(Request $request, $id){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_nine = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_nine);
-        
+
     }else{
         $image_nine = $request->image_nine_cheat;
     }
 
     if(isset($request->image_ten)){
         $fileSize = $request->file('image_ten');
-       
-           
+
+
             $file = $request->file('image_ten');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -952,15 +954,15 @@ public function edit_Product(Request $request, $id){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_ten = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_ten);
-        
+
     }else{
         $image_ten = $request->image_ten_cheat;
     }
 
     if(isset($request->slider)){
         $fileSize = $request->file('slider');
-       
-           
+
+
             $file = $request->file('slider');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -968,14 +970,14 @@ public function edit_Product(Request $request, $id){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $slider = str_replace(' ', '',$image_main_temp);
             $file->move($path, $slider);
-        
+
     }else{
         $slider = $request->slider_cheat;
     }
-   
+
 
     $updateDetails = array(
-   
+
         'name' =>$request->name,
         'slung' =>Str::slug($request->title),
         'title' =>$request->title,
@@ -1009,7 +1011,7 @@ public function edit_Product(Request $request, $id){
 }
 
 public function deleteProduct($id){
-    
+
     DB::table('product')->where('id',$id)->delete();
     return Redirect::back();
 }
@@ -1063,8 +1065,8 @@ public function add_Testimonial(Request $request){
 
     $path = 'uploads/testimonials';
     if(isset($request->image_one)){
-        
-            
+
+
             $file = $request->file('image_one');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -1072,14 +1074,14 @@ public function add_Testimonial(Request $request){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_one = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_one);
-            
+
     }else{
         $image_one = $request->pro_img_cheat;
     }
 
-    
 
-   
+
+
 
     $Testimonial = new Testimonial;
     $Testimonial->name = $request->name;
@@ -1088,11 +1090,11 @@ public function add_Testimonial(Request $request){
     $Testimonial->service = $request->service;
     $Testimonial->position = $request->position;
     $Testimonial->rating = $request->rating;
-    
+
     $Testimonial->image = $image_one;
-     
+
     $Testimonial->save();
-  
+
     Session::flash('message', "Testimonial Has Been Added");
     return Redirect::back();
 }
@@ -1115,8 +1117,8 @@ public function editTestimonial($id){
 public function edit_Testimonial(Request $request, $id){
     $path = 'uploads/testimonials';
     if(isset($request->image_one)){
-       
-            
+
+
             $file = $request->file('image_one');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -1124,13 +1126,13 @@ public function edit_Testimonial(Request $request, $id){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_one = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_one);
-            
+
     }else{
         $image_one = $request->image_one_cheat;
     }
 
 
-   
+
 
     $updateDetails = array(
         'name' => $request->name,
@@ -1139,8 +1141,8 @@ public function edit_Testimonial(Request $request, $id){
         'company' => $request->company,
         'position' => $request->position,
         'image' =>$image_one,
-        
-        
+
+
     );
     DB::table('testimonials')->where('id',$id)->update($updateDetails);
     Session::flash('message', "Changes have been saved");
@@ -1149,12 +1151,12 @@ public function edit_Testimonial(Request $request, $id){
 
 public function deleteTestimonial($id){
     DB::table('testimonials')->where('id',$id)->delete();
-   
+
     return Redirect::back();
 }
 
 public function deleteImage($id,$image,$table){
-    
+
     $updateDetails = array(
         $image=>NULL,
     );
@@ -1174,8 +1176,8 @@ public function add_Blog(Request $request){
 
     $path = 'uploads/blogs';
     if(isset($request->image_one)){
-        
-            
+
+
             $file = $request->file('image_one');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -1183,14 +1185,14 @@ public function add_Blog(Request $request){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_one = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_one);
-            
+
     }else{
         $image_one = $request->pro_img_cheat;
     }
 
     if(isset($request->image_two)){
-        
-            
+
+
             $file = $request->file('image_two');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -1198,16 +1200,16 @@ public function add_Blog(Request $request){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_two = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_two);
-         
+
     }else{
         $image_two = $request->pro_img_cheat;
     }
 
-    
+
     if(isset($request->image_three)){
         $fileSize = $request->file('image_three');
-       
-           
+
+
             $file = $request->file('image_three');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -1215,15 +1217,15 @@ public function add_Blog(Request $request){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_three = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_three);
-        
+
     }else{
         $image_three = $request->pro_img_cheat;
     }
 
     if(isset($request->image_four)){
         $fileSize = $request->file('image_four');
-       
-           
+
+
             $file = $request->file('image_four');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -1231,15 +1233,15 @@ public function add_Blog(Request $request){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_four = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_four);
-        
+
     }else{
         $image_four = $request->pro_img_cheat;
     }
 
     if(isset($request->image_five)){
         $fileSize = $request->file('image_five');
-       
-           
+
+
             $file = $request->file('image_five');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -1247,7 +1249,7 @@ public function add_Blog(Request $request){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_five = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_five);
-        
+
     }else{
         $image_five = $request->pro_img_cheat;
     }
@@ -1270,9 +1272,9 @@ public function add_Blog(Request $request){
     $Blog->image_three = $image_three;
     $Blog->image_four = $image_four;
     $Blog->image_five = $image_five;
- 
+
     $Blog->save();
-    
+
     Session::flash('message', "You have Added One New Blog");
     return Redirect::back();
 }
@@ -1299,8 +1301,8 @@ public function edit_Blog(Request $request, $id){
 
     $path = 'uploads/blogs';
     if(isset($request->image_one)){
-        
-            
+
+
             $file = $request->file('image_one');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -1308,14 +1310,14 @@ public function edit_Blog(Request $request, $id){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_one = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_one);
-            
+
     }else{
         $image_one = $request->image_one_cheat;
     }
 
     if(isset($request->image_two)){
-        
-            
+
+
             $file = $request->file('image_two');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -1323,16 +1325,16 @@ public function edit_Blog(Request $request, $id){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_two = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_two);
-         
+
     }else{
         $image_two = $request->image_two_cheat;
     }
 
-    
+
     if(isset($request->image_three)){
         $fileSize = $request->file('image_three');
-       
-           
+
+
             $file = $request->file('image_three');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -1340,15 +1342,15 @@ public function edit_Blog(Request $request, $id){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_three = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_three);
-        
+
     }else{
         $image_three = $request->image_three_cheat;
     }
 
     if(isset($request->image_four)){
         $fileSize = $request->file('image_four');
-       
-           
+
+
             $file = $request->file('image_four');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -1356,15 +1358,15 @@ public function edit_Blog(Request $request, $id){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_four = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_four);
-        
+
     }else{
         $image_four = $request->image_four_cheat;
     }
 
     if(isset($request->image_five)){
         $fileSize = $request->file('image_five');
-       
-           
+
+
             $file = $request->file('image_five');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -1372,7 +1374,7 @@ public function edit_Blog(Request $request, $id){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_five = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_five);
-        
+
     }else{
         $image_five = $request->image_five_cheat;
     }
@@ -1441,7 +1443,7 @@ public function add_product_Slider($id){
     return Redirect::back();
 }
 
-// 
+//
 
 public function addSermon(){
     $page_title = 'formfiletext';//For Layout Inheritance
@@ -1453,8 +1455,8 @@ public function add_Sermon(Request $request){
 
     $path = 'uploads/sermons';
     if(isset($request->audio)){
-        
-            
+
+
         $file = $request->file('audio');
         $filename = str_replace(' ', '', $file->getClientOriginalName());
         $timestamp = new Datetime();
@@ -1462,14 +1464,14 @@ public function add_Sermon(Request $request){
         $audio_main_temp = $new_timestamp.'audio'.$filename;
         $audio = str_replace(' ', '',$audio_main_temp);
         $file->move($path, $audio);
-        
+
     }else{
         $audio = null;
     }
 
     if(isset($request->image_one)){
-        
-            
+
+
             $file = $request->file('image_one');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -1477,14 +1479,14 @@ public function add_Sermon(Request $request){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_one = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_one);
-            
+
     }else{
         $image_one = $request->pro_img_cheat;
     }
 
     if(isset($request->image_file)){
-        
-            
+
+
         $file = $request->file('image_file');
         $filename = str_replace(' ', '', $file->getClientOriginalName());
         $timestamp = new Datetime();
@@ -1492,13 +1494,13 @@ public function add_Sermon(Request $request){
         $image_main_temp = $new_timestamp.'file'.$filename;
         $image_file = str_replace(' ', '',$image_main_temp);
         $file->move($path, $image_file);
-     
-         
+
+
     }else{
         $image_file = $request->pro_img_cheat;
     }
 
-    
+
     $url = "https://gracecommunitybiblechurch.org";
 
 
@@ -1509,14 +1511,14 @@ public function add_Sermon(Request $request){
     $Sermon->author = $request->author;
     $Sermon->meta = $request->meta;
     $Sermon->audio = "$url/uploads/sermons/$audio";
-    
+
     $Sermon->books = $request->books;
     $Sermon->author = $request->agent;
     $Sermon->video = $request->video;
     $Sermon->image = $image_one;
     $Sermon->file = $image_file;
     $Sermon->save();
-    
+
     Session::flash('message', "You have Added One New Sermon");
     return Redirect::back();
 }
@@ -1544,10 +1546,10 @@ public function edit_Sermon(Request $request, $id){
 
     $path = 'uploads/sermons';
 
-    
+
     if(isset($request->audio)){
-        
-            
+
+
         $file = $request->file('audio');
         $filename = str_replace(' ', '', $file->getClientOriginalName());
         $timestamp = new Datetime();
@@ -1555,14 +1557,14 @@ public function edit_Sermon(Request $request, $id){
         $audio_main_temp = $new_timestamp.'audio'.$filename;
         $audio = str_replace(' ', '',$audio_main_temp);
         $file->move($path, $audio);
-        
+
     }else{
         $audio = $request->image_one_cheat;
     }
 
     if(isset($request->image_one)){
-        
-            
+
+
             $file = $request->file('image_one');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -1570,14 +1572,14 @@ public function edit_Sermon(Request $request, $id){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_one = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_one);
-            
+
     }else{
         $image_one = $request->image_one_cheat;
     }
 
     if(isset($request->image_file)){
-        
-            
+
+
         $file = $request->file('image_file');
         $filename = str_replace(' ', '', $file->getClientOriginalName());
         $timestamp = new Datetime();
@@ -1585,13 +1587,13 @@ public function edit_Sermon(Request $request, $id){
         $image_main_temp = $new_timestamp.'file'.$filename;
         $image_file = str_replace(' ', '',$image_main_temp);
         $file->move($path, $image_file);
-     
+
     }else{
         $image_file = $request->image_file_cheat;
     }
 
-    
-  
+
+
 
     $url = "https://gracecommunitybiblechurch.org";
 
@@ -1618,7 +1620,7 @@ public function deleteSermon($id){
     $Curriculum = DB::table('sermons')->where('id',$id)->get();
     return Redirect::back();
 }
-// 
+//
 
 public function slider(){
     $Slider = Slider::all();
@@ -1684,7 +1686,7 @@ public function deleteSlider($id){
 
 public function addGallery(){
     $page_title = 'formfiletext';
-   
+
     $page_name =  'Add Image';
     return view('admin.addGallery',compact('page_title','page_name'));
 }
@@ -1701,8 +1703,8 @@ public function add_Gallery(Request $request){
         $Gallery->save();
         Session::flash('message', "Image Added To Gallery");
         return Redirect::back();
-   
-} 
+
+}
 
 public function save_gallery(Request $request, $id){
     $path = 'uploads/gallery';
@@ -1736,7 +1738,7 @@ public function deleteGallery($id){
     return Redirect::back();
 }
 
-// 
+//
 public function addMinistry(){
     $page_title = 'formfiletext';//For Layout Inheritance
     $page_name = 'Add New Ministry';
@@ -1747,8 +1749,8 @@ public function add_Ministry(Request $request){
 
     $path = 'uploads/ministries';
     if(isset($request->image_one)){
-        
-            
+
+
             $file = $request->file('image_one');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -1756,14 +1758,14 @@ public function add_Ministry(Request $request){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_one = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_one);
-            
+
     }else{
         $image_one = $request->pro_img_cheat;
     }
 
     if(isset($request->image_file)){
-        
-            
+
+
         $file = $request->file('image_file');
         $filename = str_replace(' ', '', $file->getClientOriginalName());
         $timestamp = new Datetime();
@@ -1771,14 +1773,14 @@ public function add_Ministry(Request $request){
         $image_main_temp = $new_timestamp.'file'.$filename;
         $image_file = str_replace(' ', '',$image_main_temp);
         $file->move($path, $image_file);
-     
-         
+
+
     }else{
         $image_file = $request->pro_img_cheat;
     }
 
-    
-  
+
+
 
     $Ministry = new Ministry;
     $Ministry->slung = Str::slug($request->title);
@@ -1792,7 +1794,7 @@ public function add_Ministry(Request $request){
     $Ministry->image = $image_one;
     $Ministry->file = $image_file;
     $Ministry->save();
-    
+
     Session::flash('message', "You have Added One New Ministry");
     return Redirect::back();
 }
@@ -1820,8 +1822,8 @@ public function edit_Ministry(Request $request, $id){
 
     $path = 'uploads/ministries';
     if(isset($request->image_one)){
-        
-            
+
+
             $file = $request->file('image_one');
             $filename = str_replace(' ', '', $file->getClientOriginalName());
             $timestamp = new Datetime();
@@ -1829,13 +1831,13 @@ public function edit_Ministry(Request $request, $id){
             $image_main_temp = $new_timestamp.'image'.$filename;
             $image_one = str_replace(' ', '',$image_main_temp);
             $file->move($path, $image_one);
-            
+
     }else{
         $image_one = $request->image_one_cheat;
     }
 
-    
-  
+
+
 
 
 
@@ -1846,7 +1848,7 @@ public function edit_Ministry(Request $request, $id){
         'meta' =>$request->meta,
         'video' =>$request->video,
         'image' =>$image_one,
-      
+
     );
     DB::table('ministries')->where('id',$id)->update($updateDetails);
     Session::flash('message', "Changes have been saved");
@@ -1859,5 +1861,55 @@ public function deleteMinistry($id){
     $Curriculum = DB::table('ministries')->where('id',$id)->get();
     return Redirect::back();
 }
-// 
+
+public function events(){
+    $Event = Event::all();
+    $page_title = 'list';
+    $page_name = 'All Event';
+    return view('admin.events',compact('page_title','Event','page_name'));
+}
+
+public function addEvent(){
+    $page_title = 'formfiletext';
+    $page_name = 'Add Event';
+    return view('admin.addEvent',compact('page_title','page_name'));
+}
+
+public function add_Event(Request $request){
+
+    $Event = new Event;
+    $Event->title = $request->title;
+    $Event->start = $request->start;
+    $Event->end = $request->end;
+
+    $Event->save();
+    Session::flash('message', "Event Has Been Added");
+    return Redirect::back();
+}
+
+public function editEvent($id){
+    $Event = Event::find($id);
+    $page_title = 'formfiletext';
+    $page_name = 'Edit';
+    return view('admin.editEvent',compact('page_title','Event','page_name'));
+}
+
+public function edit_Event(Request $request, $id){
+
+    $updateDetails = array(
+        'title'=>$request->title,
+        'start'=>$request->start,
+        'end'=>$request->end,
+    );
+    DB::table('events')->where('id',$id)->update($updateDetails);
+    Session::flash('message', "Changes have been saved");
+    return Redirect::back();
+}
+
+public function deleteEvent($id){
+    DB::table('events')->where('id',$id)->delete();
+    return Redirect::back();
+}
+
+//
 }

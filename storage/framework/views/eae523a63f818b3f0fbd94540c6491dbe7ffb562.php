@@ -1,17 +1,15 @@
-@extends('admin.master')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div id="wrap" >
 
 
         <!-- HEADER SECTION -->
-        @include('admin.top')
+        <?php echo $__env->make('admin.top', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <!-- END HEADER SECTION -->
 
 
 
         <!-- MENU SECTION -->
-        @include('admin.left')
+        <?php echo $__env->make('admin.left', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <!--END MENU SECTION -->
 
 
@@ -23,7 +21,7 @@
                 <div class="row">
                     <div class="col-lg-12">
 
-                        <center><h2> Edit Event </h2></center>
+                        <center><h2> Add Event </h2></center>
 
                     </div>
                 </div>
@@ -31,7 +29,7 @@
                  <!--BLOCK SECTION -->
                  <div class="row">
                     <div class="col-lg-12">
-                        @include('admin.panel')
+                        <?php echo $__env->make('admin.panel', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
                     </div>
 
@@ -47,26 +45,25 @@
 
               <div class="row">
                <center>
-                 @if(Session::has('message'))
-							   <div class="alert alert-success">{{ Session::get('message') }}</div>
-				@endif
+                 <?php if(Session::has('message')): ?>
+							   <div class="alert alert-success"><?php echo e(Session::get('message')); ?></div>
+				<?php endif; ?>
 
-                @if(Session::has('messageError'))
-							   <div class="alert alert-danger">{{ Session::get('messageError') }}</div>
-				@endif
+                <?php if(Session::has('messageError')): ?>
+							   <div class="alert alert-danger"><?php echo e(Session::get('messageError')); ?></div>
+				<?php endif; ?>
                  </center>
 
 
-                 <form class="form-horizontal" method="post"  action="{{url('/admin/edit_Event')}}/{{$Event->id}}" enctype="multipart/form-data">
+                 <form class="form-horizontal" method="post"  action="<?php echo e(url('/admin/add_Event')); ?>" enctype="multipart/form-data">
 
-                    <div class="form-group">
+                 <div class="form-group">
                         <label for="text1" class="control-label col-lg-4">Title</label>
 
                         <div class="col-lg-8">
-                            <input type="text" id="text1" name="title" value="{{$Event->title}}" placeholder="e.g Travel Websites Emerging trends " class="form-control" />
+                            <input type="text" id="text1" name="title"  placeholder="e.g Hr meeting" class="form-control" />
                         </div>
                     </div>
-
 
 
 
@@ -78,7 +75,7 @@
 
                         <div class="col-lg-8">
                             <div class="input-group">
-                                <input type="text" required value="{{$Event->start}}" name="start"  class="form-control"  />
+                                <input required name="start"  class="form-control" type="date" />
                                 <span class="input-group-addon add-on"><i class="icon-calendar"></i></span>
                             </div>
                         </div>
@@ -89,7 +86,7 @@
 
                         <div class="col-lg-8">
                             <div class="input-group">
-                                <input type="text" required name="end" value="{{$Event->end}}"  class="form-control"  />
+                                <input required name="end"  class="form-control" type="date" />
                                 <span class="input-group-addon add-on"><i class="icon-calendar"></i></span>
                             </div>
                         </div>
@@ -101,44 +98,32 @@
                         <label for="text1" class="control-label col-lg-4">Author</label>
 
                         <div class="col-lg-8">
-                            <input type="text" readonly id="text1" name="author" value="{{Auth::user()->name}}" class="form-control" />
+                            <input type="text" readonly id="text1" name="author" value="<?php echo e(Auth::user()->name); ?>" class="form-control" />
                         </div>
                     </div>
 
 
 
 
+                        
 
-
-                    {{-- <center>
+                    <center>
                     <div class="form-group col-lg-12">
-                    <div class="form-group col-lg-12">
-                        <label class="control-label">Image One(Main)</label>
-                        <div class="">
-                            <div class="fileupload fileupload-new" data-provides="fileupload">
-                                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="{{url('/')}}/uploads/events/{{$Event->image}}" alt="" /></div>
-                                <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-                                <div>
-                                    <span class="btn btn-file btn-primary"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input name="image_one" type="file" /></span>
-                                    <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">Remove</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
 
 
 
 
                     </div>
-                    </center> --}}
+                    </center>
                     <br><br>
                     <div class="col-lg-12 text-center">
                       <button type="submit" class="btn btn-success"><i class="icon-check icon-white"></i> Save </button>
                     </div>
-                    <input type="hidden" name="image_one_cheat" value="{{$Event->image}}">
+                    <input type="hidden" name="image_one_cheat" value="0">
 
 
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 
                 <form>
               </div>
@@ -155,8 +140,10 @@
         <!--END PAGE CONTENT -->
 
          <!-- RIGHT STRIP  SECTION -->
-        @include('admin.right')
+        <?php echo $__env->make('admin.right', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
          <!-- END RIGHT STRIP  SECTION -->
     </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/designekta/gcbc/resources/views/admin/addEvent.blade.php ENDPATH**/ ?>
