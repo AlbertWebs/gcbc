@@ -77,7 +77,7 @@
                                                         @endif --}}
 
                                                     </center>
-                                                    <td class="center"><a onclick="return confirm('Do you want to delete this Post?')" href="{{url('/admin')}}/delete_Event/{{$value->id}}"   class="btn btn-danger"><i class="icon-trash icon-white"></i> Del</a></td>
+                                                    <td class="center"><a onclick="return confirm('Do you want to delete this Post?')" href="{{url('/admin')}}/deleteEvent/{{$value->id}}"   class="btn btn-danger"><i class="icon-trash icon-white"></i> Del</a></td>
 
                                                 </tr>
                                             @endforeach
