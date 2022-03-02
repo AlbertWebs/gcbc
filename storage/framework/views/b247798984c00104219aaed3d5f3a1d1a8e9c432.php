@@ -99,7 +99,7 @@
 
                         <li><a href="<?php echo e(url('our-programs')); ?>">Schedule</a></li>
                         
-                        <li><a  href="<?php echo e(url('/')); ?>/give-now">Give</a>
+                        <li><a  href="<?php echo e(url('/')); ?>/give-paybill">Give</a>
 
                         </li>
                         <li><a href="<?php echo e(url('/')); ?>/contact-us">contact us</a></li>

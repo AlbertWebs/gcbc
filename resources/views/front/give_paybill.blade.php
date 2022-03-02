@@ -11,18 +11,18 @@
 		<h3>PayBill Number</h3>
 	<hr>
 	</div>
-       
+
             {{--  --}}
             <section>
                 <div class="container">
                   <div class="row text-center">
-                    <img class="paybill" style="" src="{{url('/')}}/uploads/banners/GCBC-MPESA-02.png" alt="">
+                    <img width="500" class="paybill" style="" src="{{url('/')}}/uploads/banners/GCBC-mpesa-03-min.png" alt="">
                   </div>
                 </div>
               </section>
             {{--  --}}
 
-            
+
             <section style="padding:0px; margin:0 auto !important">
                 <div class="weekly-groups_services full-width-services text-center">
                     <ul class="services_weekly">
@@ -59,15 +59,15 @@
                     </ul>
                 </div>
             </section>
-        
+
 
 		</div>
-		
 
 
 
 
- 
+
+
 
 @endforeach
 @endsection
